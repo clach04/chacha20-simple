@@ -47,31 +47,31 @@ Since this situation cannot stand, especially with ChaCha20 gaining speed, I am 
 
 Usage of the [C99](http://en.wikipedia.org/wiki/C99) API I designed is as follows:
 
-Custom type: _chacha20\_ctx_
+Custom type: `_chacha20_ctx_`
 This type is used as a context for a state of encryption.
 
 To initialize:
 
-_void_ chacha20\_setup(_chacha20\_ctx \*_ctx, _const uint8\_t \*_key, _size\_t_ length, _uint8\_t_ nonce\[8\]);
+    _void_ chacha20_setup(_chacha20_ctx *_ctx, _const uint8_t *_key, _size_t_ length, _uint8_t_ nonce[8]);
 
 
 The encryption key is passed via a pointer to a byte array and its length in bytes. The key can be 16 or 32 bytes. The [nonce](http://en.wikipedia.org/wiki/Cryptographic_nonce) is always 8 bytes.
 
 Once initialized, to encrypt data:
 
-_void_ chacha20\_encrypt(_chacha20\_ctx \*_ctx, _const uint8\_t \*_in, _uint8\_t \*_out, _size\_t_ length);
+    _void_ chacha20_encrypt(_chacha20_ctx *_ctx, _const uint8_t *_in, _uint8_t *_out, _size_t_ length);
 
 
 You can pass an arbitrary amount of data to be encrypted, just ensure the output buffer is always at least as large as the input buffer. This function can be called repeatedly, and it doesn't matter what was done with it previously.
 
 To decrypt data, initialize, and then call the decryption function:
 
-_void_ chacha20\_decrypt(_chacha20\_ctx \*_ctx, _const uint8\_t \*_in, _uint8\_t \*_out, _size\_t_ length);
+    _void_ chacha20_decrypt(_chacha20_ctx *_ctx, _const uint8_t *_in, _uint8_t *_out, _size_t_ length);
 
 
 For encryption or decryption, if you want to jump ahead to a particular block:
 
-_void_ chacha20\_counter\_set(_chacha20\_ctx \*_ctx, _uint64\_t_ counter);
+    _void_ chacha20_counter_set(_chacha20_ctx *_ctx, _uint64_t_ counter);
 
 
 Counter is essentially the number of the next block to encrypt/decrypt. ChaCha20's internal block size is 64 bytes, so to calculate how many bytes are skipped by a particular counter value, multiply it by 64.
