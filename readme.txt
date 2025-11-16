@@ -6,3 +6,5 @@ This implementation focuses on simplicity and correctness.
 Test vectors with a battery of unit tests are included.
 
 See chacha_simple.h for a list of functions and description.
+
+See fork https://github.com/ivoras/chacha20_simple
